@@ -1,11 +1,12 @@
 package com.example.escuela;
 
 import android.os.Bundle;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,13 +20,11 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recycler =
                 findViewById(R.id.recyclerEstudiantes);
 
-        List<Estudiante> estudiantes = new ArrayList<>();
+        EstudianteRepository repository =
+                new EstudianteRepository();
 
-        estudiantes.add(new Estudiante("Ana López", 9.5));
-        estudiantes.add(new Estudiante("Carlos Pérez", 8.2));
-        estudiantes.add(new Estudiante("María García", 10.0));
-        estudiantes.add(new Estudiante("José Hernández", 7.8));
-        estudiantes.add(new Estudiante("Lucía Martínez", 9.0));
+        List<Estudiante> estudiantes =
+                repository.obtenerTodos();
 
         recycler.setLayoutManager(
                 new LinearLayoutManager(this)
@@ -35,6 +34,5 @@ public class MainActivity extends AppCompatActivity {
                 new EstudianteAdapter(estudiantes);
 
         recycler.setAdapter(adapter);
-
     }
 }
