@@ -1,4 +1,6 @@
-package com.example.escuela;
+package com.example.escuela.repository;
+
+import com.example.escuela.model.Estudiante;
 
 import java.util.Arrays;
 import java.util.Collections;

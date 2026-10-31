@@ -1,4 +1,5 @@
-package com.example.escuela;
+package com.example.escuela.model;
+
 public class Estudiante {
 
     private final String nombre;

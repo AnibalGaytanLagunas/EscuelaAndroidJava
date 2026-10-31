@@ -1,4 +1,4 @@
-package com.example.escuela;
+package com.example.escuela.view;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,16 +8,27 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.escuela.R;
+import com.example.escuela.model.Estudiante;
+
 import java.util.List;
 import java.util.Locale;
 
 public class EstudianteAdapter
         extends RecyclerView.Adapter<EstudianteAdapter.ViewHolder> {
 
-    private final List<Estudiante> estudiantes;
+    public interface OnEstudianteClickListener {
+        void onEstudianteClick(Estudiante estudiante);
+    }
 
-    public EstudianteAdapter(List<Estudiante> estudiantes) {
+    private final List<Estudiante> estudiantes;
+    private final OnEstudianteClickListener listener;
+
+    public EstudianteAdapter(
+            List<Estudiante> estudiantes,
+            OnEstudianteClickListener listener) {
         this.estudiantes = estudiantes;
+        this.listener = listener;
     }
 
     @NonNull
@@ -46,6 +57,10 @@ public class EstudianteAdapter
                         estudiante.getCalificacion()
                 )
         );
+
+        holder.itemView.setOnClickListener(v ->
+                listener.onEstudianteClick(estudiante)
+        );
     }
 
     @Override
@@ -55,8 +70,8 @@ public class EstudianteAdapter
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtNombre;
-        TextView txtCalificacion;
+        final TextView txtNombre;
+        final TextView txtCalificacion;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
